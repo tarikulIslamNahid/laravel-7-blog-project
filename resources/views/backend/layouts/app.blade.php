@@ -27,8 +27,17 @@
 {{-- data table --}}
 {{-- <link href="{{asset('admin')}}/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" /> --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
 @yield('style')
+<style>
+    .toast-success {
+    background-color: #1abc9c !important;
+}
+    .toast-error {
+    background-color: #e7515a !important;
+}
+</style>
 </head>
 <body>
         {{-- Header & Sub Header Content  --}}
@@ -69,6 +78,9 @@
     <script src="{{asset('admin')}}/plugins/apex/apexcharts.min.js"></script>
     <script src="{{asset('admin')}}/assets/js/dashboard/dash_1.js"></script>
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+	<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+        {!! Toastr::message() !!}
 
 @yield('script')
 

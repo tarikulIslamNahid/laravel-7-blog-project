@@ -59,6 +59,7 @@
 @method('PUT')
                                 <td>{{$user->name}}</td>
                                 <td>
+
                                     {{-- {{$user->role->name}} --}}
                                     <select name="role_id" class='form-control' id="">
                                         @foreach ($roles as $role)

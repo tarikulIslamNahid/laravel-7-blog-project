@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\roles;
 use App\User;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,13 +68,15 @@ class UserController extends Controller
     {
         $user=User::findOrFail($id);
         if(Auth::user()->id==$id){
-return redirect()->route('admin.user.index')->with('updateuserFailed','User Updated Failed');
+         Toastr::error('Failed', "User can't Updated own role",["progressBar" => true,"timeOut"=> "1200",]) ;
+
+return redirect()->route('admin.user.index');
 
         }else{
             $user->role_id=$request->role_id;
             $user->update();
-
-            return redirect()->route('admin.user.index')->with('updateuser','User Updated');
+         Toastr::success('Successfully', 'User Role Updated',["progressBar" => true,"timeOut"=> "1200",]) ;
+            return redirect()->route('admin.user.index');
 
         }
 
