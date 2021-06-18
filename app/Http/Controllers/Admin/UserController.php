@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\roles;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -13,8 +16,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        // return view('backend.layouts.app');
-        return view('backend.user.index');
+   $users =User::all();
+        return view('backend.user.index',compact('users'));
     }
 
     /**
@@ -39,17 +42,6 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -57,7 +49,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $roles=roles::all();
+        $user=User::findOrFail($id);
+        return view('backend.user.edit',compact('user','roles'));
+
+
     }
 
     /**
@@ -69,7 +65,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user=User::findOrFail($id);
+        if(Auth::user()->id==$id){
+return redirect()->route('admin.user.index')->with('updateuserFailed','User Updated Failed');
+
+        }else{
+            $user->role_id=$request->role_id;
+            $user->update();
+
+            return redirect()->route('admin.user.index')->with('updateuser','User Updated');
+
+        }
+
     }
 
     /**

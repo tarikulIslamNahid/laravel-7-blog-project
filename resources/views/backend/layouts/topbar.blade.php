@@ -11,7 +11,7 @@
         <ul class="navbar-item theme-brand flex-row  text-center">
             <li class="nav-item theme-logo">
                 <a href="index-2.html">
-                    <img src="assets/img/logo.svg" class="navbar-logo" alt="logo">
+                    <img src="{{asset('admin')}}/assets/img/logo.svg" class="navbar-logo" alt="logo">
                 </a>
             </li>
             <li class="nav-item theme-text">
@@ -34,13 +34,13 @@
 
             <li class="nav-item dropdown language-dropdown">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="language-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="assets/img/ca.png" class="flag-width" alt="flag">
+                    <img src="{{asset('admin')}}/assets/img/ca.png" class="flag-width" alt="flag">
                 </a>
                 <div class="dropdown-menu position-absolute" aria-labelledby="language-dropdown">
-                    <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="assets/img/de.png" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;German</span></a>
-                    <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="assets/img/jp.png" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;Japanese</span></a>
-                    <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="assets/img/fr.png" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;French</span></a>
-                    <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="assets/img/ca.png" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;English</span></a>
+                    <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="{{asset('admin')}}/assets/img/de.png" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;German</span></a>
+                    <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="{{asset('admin')}}/assets/img/jp.png" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;Japanese</span></a>
+                    <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="{{asset('admin')}}/assets/img/fr.png" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;French</span></a>
+                    <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="{{asset('admin')}}/assets/img/ca.png" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;English</span></a>
                 </div>
             </li>
 
@@ -73,7 +73,7 @@
                             <div class="">
                                 <div class="media">
                                     <div class="user-img">
-                                        <img src="assets/img/profile-15.jpg" class="img-fluid mr-2" alt="avatar">
+                                        <img src="{{asset('admin')}}/assets/img/profile-15.jpg" class="img-fluid mr-2" alt="avatar">
                                     </div>
                                     <div class="media-body">
                                         <div class="">
@@ -168,7 +168,7 @@
 
             <li class="nav-item dropdown user-profile-dropdown">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <img src="assets/img/profile-16.jpg" alt="avatar">
+                    <img src="{{asset('admin')}}/assets/img/profile-16.jpg" alt="avatar">
                 </a>
                 <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
                     <div class="">
