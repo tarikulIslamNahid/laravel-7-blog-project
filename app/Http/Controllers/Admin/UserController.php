@@ -68,7 +68,7 @@ class UserController extends Controller
     {
         $user=User::findOrFail($id);
         if(Auth::user()->id==$id){
-         Toastr::error('Failed', "User can't Updated own role",["progressBar" => true,"timeOut"=> "1200",]) ;
+         Toastr::error('Failed', "User cant Updated own role",["progressBar" => true,"timeOut"=> "1200",]) ;
 
 return redirect()->route('admin.user.index');
 
@@ -90,6 +90,9 @@ return redirect()->route('admin.user.index');
      */
     public function destroy($id)
     {
-        //
+        $user=User::findOrFail($id)->delete();
+        Toastr::success('Successfully', 'User Role Deleted',["progressBar" => true,"timeOut"=> "1200",]) ;
+        return redirect()->route('admin.user.index');
+
     }
 }
