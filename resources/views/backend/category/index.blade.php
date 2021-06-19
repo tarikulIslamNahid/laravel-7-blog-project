@@ -46,6 +46,7 @@
                         <thead>
                             <tr>
                                 <th>SL</th>
+                                <th>Image</th>
                                 <th>Name</th>
                                 <th>Slug</th>
                                 <th class="no-content">Actions</th>
@@ -56,6 +57,7 @@
 
                             <tr>
                                 <td>{{$key+1}}</td>
+                                <td><img width="60px" height="60px" src="{{url('storage/category/'.$category->image)}}" class="img-responsive img-fluid" alt=""></td>
                                 <td>{{$category->name}}</td>
 
                                 <td>{{$category->slug}}</td>

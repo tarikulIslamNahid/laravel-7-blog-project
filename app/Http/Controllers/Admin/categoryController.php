@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class categoryController extends Controller
 {
@@ -42,12 +43,19 @@ class categoryController extends Controller
     {
         $validateData =$request->validate([
             'name' =>'required|unique:categories',
+            'image' =>'required|image|mimes:png,jpg,jpeg'
         ]);
+        $image = $request->image;
+        $imgName=Str::slug($request->name).uniqid().'.'. $image->getClientOriginalExtension();
+        if(!Storage::disk('public')->exists('category')){
+            Storage::disk('public')->makeDirectory('category');
+        }
+        $image->storeAs('category',$imgName,'public');
         $categories= new categories;
         $categories->name=$request->name;
         $categories->slug= Str::slug($request->name) ;
         $categories->disc=$request->disc;
-        $categories->image=$request->image;
+        $categories->image=$imgName;
         $categories->save();
 
         Toastr::success('Successfully', 'Category Created',["progressBar" => true,"timeOut"=> "1200",]) ;
@@ -88,12 +96,34 @@ class categoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $categories=categories::where('slug',$id)->first();
-        $categories->name=$request->name;
-        $categories->slug= Str::slug($request->name) ;
-        $categories->disc=$request->disc;
-        // $categories->image=$request->image;
-        $categories->save();
+        if($request->image!=null){
+            $categories=categories::where('slug',$id)->first();
+            $image = $request->image;
+            $imgName=Str::slug($request->name).uniqid().'.'. $image->getClientOriginalExtension();
+            if(!Storage::disk('public')->exists('category')){
+                Storage::disk('public')->makeDirectory('category');
+            }
+
+            $image->storeAs('category',$imgName,'public');
+
+            // check image exists or not in folder
+            if(Storage::disk('public')->exists('category/'.$categories->image)){
+                unlink('storage/category/'.$categories->image);
+            }
+            $categories->name=$request->name;
+            $categories->slug= Str::slug($request->name) ;
+            $categories->disc=$request->disc;
+            $categories->image=$imgName;
+
+            $categories->save();
+        }else{
+            $categories=categories::where('slug',$id)->first();
+            $categories->name=$request->name;
+            $categories->slug= Str::slug($request->name) ;
+            $categories->disc=$request->disc;
+            $categories->save();
+        }
+
 
         Toastr::success('Successfully', 'Category Updated',["progressBar" => true,"timeOut"=> "1200",]) ;
         return redirect()->route('admin.category.index');
@@ -107,8 +137,13 @@ class categoryController extends Controller
      */
     public function destroy($id)
     {
-        categories::findOrFail($id)->delete();
-        Toastr::success('Successfully', 'Category Deleted',["progressBar" => true,"timeOut"=> "1200",]) ;
+       $categories = categories::findOrFail($id);
+        // check image exists or not in folder
+        if(Storage::disk('public')->exists('category/'.$categories->image)){
+        unlink('storage/category/'.$categories->image);
+        }
+        $categories->delete();
+        Toastr::success('Successfully Category Deleted',["progressBar" => true,"timeOut"=> "1200",]) ;
         return redirect()->route('admin.category.index');
     }
 }
