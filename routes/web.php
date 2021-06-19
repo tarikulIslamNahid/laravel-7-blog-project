@@ -31,6 +31,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix'=>'admin','as'=>'admin.','namespace'=>'Admin','middleware'=>['auth','admin']], function(){
     Route::get('dashboard','dashboardController@index')->name('dashboard');
     Route::resource('user','UserController');
+    Route::resource('category','categoryController');
 });
 
 Route::group(['prefix'=>'user','as'=>'user.','namespace'=>'User','middleware'=>['auth','user']], function(){
