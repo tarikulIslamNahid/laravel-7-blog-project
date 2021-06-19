@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\categories;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
-use Str;
-
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class categoryController extends Controller
@@ -108,6 +107,8 @@ class categoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        categories::findOrFail($id)->delete();
+        Toastr::success('Successfully', 'Category Deleted',["progressBar" => true,"timeOut"=> "1200",]) ;
+        return redirect()->route('admin.category.index');
     }
 }
