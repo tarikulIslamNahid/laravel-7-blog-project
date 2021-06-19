@@ -20,6 +20,21 @@
     <div class="layout-px-spacing ">
 {{-- content --}}
 
+<div class="row">
+    <div class="col-12">
+        @if ($errors->any())
+<div class="alert alert-danger">
+<ul>
+@foreach ($errors->all() as $error)
+{{-- {{ Toastr::success($error,["progressBar" => true,"timeOut"=> "1200"])}} --}}
+<li>{{$error}}</li>
+@endforeach
+</ul>
+</div>
+@endif
+    </div>
+</div>
+
 
 
 <div id="custom_styles" class="col-lg-12 mt-4 layout-spacing col-md-12">
